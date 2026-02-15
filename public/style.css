@@ -123,3 +123,45 @@ button:active {
         padding: 1.5rem;
     }
 }
+
+
+/* Header with Logo */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.8rem; /* Slightly larger for impact */
+}
+
+/* Responsive: Stack logo/title on small screens */
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .logo {
+        height: 35px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+}

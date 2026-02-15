@@ -1,4 +1,8 @@
 {
   "kjkljk": "http://127.0.0.1:5500/index.html",
-  "my-cool-link": "https://www.youtube.com/watch?v=HjSMAgpdwaw&list=RDQBI3F4mJl2g&index=3"
+  "my-cool-link": "https://www.youtube.com/watch?v=HjSMAgpdwaw&list=RDQBI3F4mJl2g&index=3",
+  "hashirjaved": "http://127.0.0.1:5500/index.html?url=http%3A%2F%2F127.0.0.1%3A5500%2Findex.html&shortcode=http%3A%2F%2F127.0.0.1%3A5500%2Findex.html",
+  "my youtube video": "https://www.youtube.com/watch?v=tsmPCi7NKrg&list=RDtsmPCi7NKrg&start_radio=1",
+  "http://127.0.0.1:5500/index.html": "http://127.0.0.1:5500/index.html",
+  "what-up-danger": "https://www.youtube.com/watch?v=nZFNut0RGlQ&list=RDnZFNut0RGlQ&start_radio=1"
 }
