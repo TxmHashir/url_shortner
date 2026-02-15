@@ -4,29 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>URL Shortener</title>
 </head>
 <body>
     <div class="container">
-        <h1>URL Shortner</h1>
-        <form id = "shorten-form">
+        <h1>URL Shortener</h1>
+        <form id="shorten-form">
             <div>
-                <label for="url">Enter URL:</label>
-                <input type="url" name = "url" id="url" required>
+                <label for="url">Enter Long URL:</label>
+                <input type="url" name="url" id="url" placeholder="https://example.com" required>
             </div>
-              <div>
-                <label for="shortcode">Enter shortcode:</label>
-                <input type="text" name = "shortcode" id="shortcode" required>
+            <div>
+                <label for="shortcode">Custom Back-half (Optional):</label>
+                <input type="text" name="shortcode" id="shortcode" placeholder="my-cool-link">
             </div>
             <button type="submit">Shorten</button>
         </form>
 
-        <h2>Shortened URLs</h2>
-        <ul id="shortened-urls"> </ul>
+        <h2>Recent Links</h2>
+        <ul id="shortened-urls"></ul>
     </div>
-    <script src="backend_file.js">
-        
+
+    <script>
+        document.getElementById('shorten-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const url = formData.get('url');
+            const shortcode = formData.get('shortcode');
+
+            try {
+                const response = await fetch("/shorten", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url, shortcode })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    const list = document.getElementById("shortened-urls");
+                    const li = document.createElement("li");
+                    const shortLink = `${window.location.origin}/${data.shortcode}`;
+
+                    li.innerHTML = `
+                        <div class="link-item">
+                            <a href="${shortLink}" target="_blank">${shortLink}</a>
+                            <button onclick="navigator.clipboard.writeText('${shortLink}')">Copy</button>
+                        </div>
+                    `;
+                    list.prepend(li); // Show newest at the top
+                    event.target.reset(); // Clear form
+                } else {
+                    alert(data.error || "Something went wrong");
+                }
+            } catch (err) {
+                console.error("Error:", err);
+            }
+        });
     </script>
 </body>
 </html>
-
