@@ -1,6 +1,9 @@
 import { Redis } from '@upstash/redis';
 
-const redis = Redis.fromEnv();   // ← this is the modern, clean way
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL || process.env.UPSTASH_REDIS_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN || process.env.UPSTASH_REDIS_TOKEN,
+});
 
 const generateShortCode = () => {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -21,90 +24,18 @@ const createPreviewHTML = (shortUrl, longUrl) => `
     <link rel="icon" href="/logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0f2a22;
-            color: #ecfdf5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .preview {
-            background: #1e3a2f;
-            max-width: 520px;
-            width: 100%;
-            margin: 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border: 1px solid #34d39933;
-        }
-        .header {
-            background: #0a211a;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #34d39922;
-        }
-        .logo {
-            height: 48px;
-            margin-bottom: 8px;
-        }
-        .title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #6ee7b7;
-        }
-        .content {
-            padding: 40px 30px;
-            text-align: center;
-        }
-        .short-url {
-            font-size: 1.4rem;
-            font-weight: 600;
-            background: #0f2a22;
-            padding: 14px 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            word-break: break-all;
-            color: #34d399;
-        }
-        .destination {
-            color: #a7f3d0;
-            font-size: 1.05rem;
-            margin: 30px 0 10px;
-        }
-        .long-url {
-            background: #0f2a22;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            word-break: break-all;
-            color: #d1fae5;
-        }
-        button {
-            background: #34d399;
-            color: #0f2a22;
-            border: none;
-            padding: 16px 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        button:hover {
-            background: #6ee7b7;
-            transform: translateY(-3px);
-        }
-        .back {
-            color: #a7f3d0;
-            margin-top: 25px;
-            display: inline-block;
-            text-decoration: none;
-        }
+        body { font-family: 'Inter', sans-serif; background: #0f2a22; color: #ecfdf5; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .preview { background: #1e3a2f; max-width: 520px; width: 100%; margin: 20px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid #34d39933; }
+        .header { background: #0a211a; padding: 20px; text-align: center; border-bottom: 1px solid #34d39922; }
+        .logo { height: 48px; margin-bottom: 8px; }
+        .title { font-size: 1.6rem; font-weight: 700; color: #6ee7b7; }
+        .content { padding: 40px 30px; text-align: center; }
+        .short-url { font-size: 1.4rem; font-weight: 600; background: #0f2a22; padding: 14px 20px; border-radius: 12px; margin: 20px 0; word-break: break-all; color: #34d399; }
+        .destination { color: #a7f3d0; font-size: 1.05rem; margin: 30px 0 10px; }
+        .long-url { background: #0f2a22; padding: 16px; border-radius: 12px; font-size: 0.95rem; word-break: break-all; color: #d1fae5; }
+        button { background: #34d399; color: #0f2a22; border: none; padding: 16px 40px; font-size: 1.1rem; font-weight: 700; border-radius: 12px; cursor: pointer; transition: all 0.3s; }
+        button:hover { background: #6ee7b7; transform: translateY(-3px); }
+        .back { color: #a7f3d0; margin-top: 25px; display: inline-block; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -115,24 +46,18 @@ const createPreviewHTML = (shortUrl, longUrl) => `
         </div>
         <div class="content">
             <p style="color:#a7f3d0; margin-bottom:8px;">You're about to visit</p>
-            
             <div class="short-url">${shortUrl}</div>
-            
             <div class="destination">This link leads to:</div>
             <div class="long-url">${longUrl}</div>
-
             <button onclick="window.location.href='${longUrl}'">Continue to website</button>
-            
             <a href="/" class="back">← Back to Leafy Shortner</a>
         </div>
     </div>
 </body>
 </html>
 `;
-// (just copy the whole `createPreviewHTML` function from your old file – it's perfect, no change needed)
 
 export default async (req, res) => {
-  // POST /shorten
   if (req.method === 'POST' && req.url === '/shorten') {
     let body = '';
     req.on('data', chunk => body += chunk);
@@ -157,7 +82,6 @@ export default async (req, res) => {
     return;
   }
 
-  // GET /:shortcode → beautiful preview
   if (req.method === 'GET') {
     const shortcode = req.url.slice(1);
     if (!shortcode) return res.status(404).send('Not found');
