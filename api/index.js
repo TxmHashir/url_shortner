@@ -1,4 +1,6 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = Redis.fromEnv();   // ← this is the modern, clean way
 
 const generateShortCode = () => {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -127,12 +129,9 @@ const createPreviewHTML = (shortUrl, longUrl) => `
 </body>
 </html>
 `;
+// (just copy the whole `createPreviewHTML` function from your old file – it's perfect, no change needed)
 
 export default async (req, res) => {
-  // Log env vars for debug (remove after fixing)
-  console.log('KV_REST_API_URL:', process.env.KV_REST_API_URL ? 'SET' : 'NOT SET');
-  console.log('KV_REST_API_TOKEN:', process.env.KV_REST_API_TOKEN ? 'SET' : 'NOT SET');
-
   // POST /shorten
   if (req.method === 'POST' && req.url === '/shorten') {
     let body = '';
@@ -140,56 +139,44 @@ export default async (req, res) => {
     req.on('end', async () => {
       try {
         const { url, shortcode } = JSON.parse(body);
-        if (!url) {
-          return res.status(400).json({ error: 'URL is required' });
-        }
+        if (!url) return res.status(400).json({ error: 'URL is required' });
 
         const finalShortCode = shortcode || generateShortCode();
 
-        console.log(`Checking if shortcode exists: ${finalShortCode}`);
-        if (await kv.get(finalShortCode)) {
+        if (await redis.get(finalShortCode)) {
           return res.status(400).json({ error: 'Shortcode already exists' });
         }
 
-        console.log(`Setting shortcode: ${finalShortCode} to ${url}`);
-        await kv.set(finalShortCode, url);
-        console.log(`Set successful for ${finalShortCode}`);
-
+        await redis.set(finalShortCode, url);
         return res.status(200).json({ shortcode: finalShortCode });
       } catch (e) {
-        console.error('POST Error:', e.message);
+        console.error(e);
         return res.status(500).json({ error: 'Invalid request' });
       }
     });
     return;
   }
 
-  // GET /:shortcode → Beautiful preview page (exactly like Bitly)
+  // GET /:shortcode → beautiful preview
   if (req.method === 'GET') {
     const shortcode = req.url.slice(1);
-    if (!shortcode) {
-      return res.status(400).send('No shortcode provided');
-    }
+    if (!shortcode) return res.status(404).send('Not found');
 
     try {
-      console.log(`Getting long URL for shortcode: ${shortcode}`);
-      const longUrl = await kv.get(shortcode);
-      console.log(`Retrieved longUrl: ${longUrl || 'NOT FOUND'}`);
-
+      const longUrl = await redis.get(shortcode);
       if (!longUrl) {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         return res.end('Short link not found');
       }
 
-      // Build full short URL (works on Vercel + localhost)
-      const protocol = req.headers['x-forwarded-proto'] ? req.headers['x-forwarded-proto'] + '://' : 'https://';
-      const host = req.headers.host || 'localhost:3003';
+      const protocol = req.headers['x-forwarded-proto'] ? `${req.headers['x-forwarded-proto']}://` : 'https://';
+      const host = req.headers.host;
       const shortUrl = `${protocol}${host}/${shortcode}`;
 
       res.writeHead(200, { 'Content-Type': 'text/html' });
       return res.end(createPreviewHTML(shortUrl, longUrl));
     } catch (e) {
-      console.error('GET Error:', e.message);
+      console.error(e);
       return res.status(500).send('Server error');
     }
   }

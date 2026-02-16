@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-  "@upstash/redis": "^1.36.2",
-  "@vercel/kv": "^1.0.1"
-},
+    "@upstash/redis": "^1.36.2"
+  },
   "scripts": {
     "dev": "node server.js"
   }

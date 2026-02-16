@@ -195,13 +195,13 @@ const server = createServer(async (req, res) => {
 
     // Root → serve index.html
     if (req.url === "/") {
-      return servefile(res, "public/index.html", "text/html");
+      return servefile(res, "index.html", "text/html");
     }
 
     // Static files (logo.png, style.css, etc.)
     if (req.url.includes(".")) {
       const staticPath = path.join("public", urlPath);
-      return servefile(res, staticPath);
+      return servefile(res, urlPath);
     }
 
     // Shortcode → Show Bitly-style preview
