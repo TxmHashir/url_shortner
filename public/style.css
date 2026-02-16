@@ -1,3 +1,5 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 * {
@@ -15,6 +17,7 @@ body {
     flex-direction: column;
 }
 
+/* Main Container */
 .container {
     background: #1e3a2f;
     padding: 2.5rem;
@@ -48,6 +51,15 @@ h1 {
     font-weight: 700;
 }
 
+h2 {
+    color: #a7f3d0;
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #34d39933;
+}
+
 /* Form */
 #shorten-form {
     display: flex;
@@ -55,9 +67,16 @@ h1 {
     gap: 1.4rem;
 }
 
+#shorten-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 label {
     color: #a7f3d0;
     font-weight: 600;
+    font-size: 0.95rem;
 }
 
 input {
@@ -92,11 +111,57 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Recent Links */
+/* Recent Links - BRIGHT & CLEAR */
+#shortened-urls {
+    list-style: none;
+    margin-top: 1.5rem;
+    padding: 0;
+}
+
 #shortened-urls li {
     background: #0f2a22;
+    padding: 14px 18px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
     border-left: 5px solid #34d399;
-    color: #ecfdf5;
+    word-break: break-all;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Short Link - Super Visible Green */
+#shortened-urls li a {
+    color: #6ee7b7;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+#shortened-urls li a:hover {
+    color: #34d399;
+    text-decoration: underline;
+}
+
+/* Copy Button */
+#shortened-urls li button {
+    background: #34d399;
+    color: #0f2a22;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+#shortened-urls li button:hover {
+    background: #6ee7b7;
+    transform: scale(1.05);
 }
 
 /* Footer */
@@ -151,6 +216,7 @@ footer {
 .contact-info p {
     margin: 8px 0;
     opacity: 0.9;
+    font-size: 0.95rem;
 }
 
 .copyright {
@@ -166,4 +232,10 @@ footer {
     .logo { height: 62px; }
     h1 { font-size: 2rem; }
     .container { margin: 20px 10px; padding: 1.8rem; }
+    
+    #shortened-urls li {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
 }
