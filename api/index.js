@@ -1,13 +1,5 @@
-import { Redis } from '@upstash/redis';
+import { kv } from '@vercel/kv';
 
-// Log env vars for debug (remove after fixing)
-console.log('KV_REST_API_URL:', process.env.KV_REST_API_URL ? 'SET' : 'NOT SET');
-console.log('KV_REST_API_TOKEN:', process.env.KV_REST_API_TOKEN ? 'SET' : 'NOT SET');
-
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL,
-  token: process.env.KV_REST_API_TOKEN,
-});
 const generateShortCode = () => {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let code = '';
@@ -99,7 +91,6 @@ const createPreviewHTML = (shortUrl, longUrl) => `
             font-weight: 700;
             border-radius: 12px;
             cursor: pointer;
-            margin-top: 30px;
             transition: all 0.3s;
         }
         button:hover {
@@ -138,6 +129,10 @@ const createPreviewHTML = (shortUrl, longUrl) => `
 `;
 
 export default async (req, res) => {
+  // Log env vars for debug (remove after fixing)
+  console.log('KV_REST_API_URL:', process.env.KV_REST_API_URL ? 'SET' : 'NOT SET');
+  console.log('KV_REST_API_TOKEN:', process.env.KV_REST_API_TOKEN ? 'SET' : 'NOT SET');
+
   // POST /shorten
   if (req.method === 'POST' && req.url === '/shorten') {
     let body = '';
@@ -150,20 +145,20 @@ export default async (req, res) => {
         }
 
         const finalShortCode = shortcode || generateShortCode();
-        console.log(`Checking if shortcode exists: ${finalShortCode}`);
 
-        if (await redis.get(finalShortCode)) {
+        console.log(`Checking if shortcode exists: ${finalShortCode}`);
+        if (await kv.get(finalShortCode)) {
           return res.status(400).json({ error: 'Shortcode already exists' });
         }
-        console.log(`Setting shortcode: ${finalShortCode} to ${url}`);
 
-        await redis.set(finalShortCode, url);
+        console.log(`Setting shortcode: ${finalShortCode} to ${url}`);
+        await kv.set(finalShortCode, url);
         console.log(`Set successful for ${finalShortCode}`);
 
         return res.status(200).json({ shortcode: finalShortCode });
       } catch (e) {
         console.error('POST Error:', e.message);
-       return res.status(500).json({ error: 'Server error: ' + e.message });
+        return res.status(500).json({ error: 'Invalid request' });
       }
     });
     return;
@@ -175,21 +170,28 @@ export default async (req, res) => {
     if (!shortcode) {
       return res.status(400).send('No shortcode provided');
     }
-console.log(`Getting long URL for shortcode: ${shortcode}`);
-    const longUrl = await redis.get(shortcode);
-    console.log(`Retrieved longUrl: ${longUrl || 'NOT FOUND'}`);
-    if (!longUrl) {
-      res.writeHead(404, { 'Content-Type': 'text/plain' });
-      return res.end('Short link not found');
+
+    try {
+      console.log(`Getting long URL for shortcode: ${shortcode}`);
+      const longUrl = await kv.get(shortcode);
+      console.log(`Retrieved longUrl: ${longUrl || 'NOT FOUND'}`);
+
+      if (!longUrl) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        return res.end('Short link not found');
+      }
+
+      // Build full short URL (works on Vercel + localhost)
+      const protocol = req.headers['x-forwarded-proto'] ? req.headers['x-forwarded-proto'] + '://' : 'https://';
+      const host = req.headers.host || 'localhost:3003';
+      const shortUrl = `${protocol}${host}/${shortcode}`;
+
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      return res.end(createPreviewHTML(shortUrl, longUrl));
+    } catch (e) {
+      console.error('GET Error:', e.message);
+      return res.status(500).send('Server error');
     }
-
-    // Build full short  URL (works on Vercel + localhost)
-    const protocol = req.headers['x-forwarded-proto'] ? req.headers['x-forwarded-proto'] + '://' : 'https://';
-    const host = req.headers.host || 'localhost:3003';
-    const shortUrl = `${protocol}${host}/${shortcode}`;
-
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    return res.end(createPreviewHTML(shortUrl, longUrl));
   }
 
   res.status(404).send('Not found');
