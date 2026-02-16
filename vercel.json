@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/shorten",
+      "destination": "/api/index.js"
+    },
+    {
       "source": "/:shortcode([^.]+)",
       "destination": "/api/index.js"
     }
