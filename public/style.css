@@ -1,161 +1,169 @@
-/* Import a clean modern font */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  /* New: Green eco-gradient to harmonize with leaf logo */
-  background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #4da76b 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+    font-family: 'Inter', sans-serif;
+    background: #0f2a22;
+    color: #ecfdf5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow for fresh feel */
-  width: 100%;
-  max-width: 450px;
-  transition: transform 0.3s ease;
+    background: #1e3a2f;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 480px;
+    margin: 40px auto;
+    flex: 1;
+    border: 1px solid #34d39922;
 }
 
+/* Header */
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 2rem;
 }
 
 .logo {
-  height: 100px; /* Bigger: From 40px to 60px for prominence */
-  width: auto;
-  border-radius: 50px;
-  box-shadow: 0 4px 12px rgba(77, 167, 107, 0.3); /* Green-tinted shadow to match logo */
- 
+    height: 72px;
+    width: auto;
+    filter: drop-shadow(0 4px 12px rgba(52, 211, 153, 0.4));
 }
 
 h1 {
-  color: #2e7d32; /* Dark green for harmony */
-  text-align: center;
-  margin: 0;
-  font-weight: 600;
-  font-size: 2rem; /* Slightly larger to balance bigger logo */
+    color: #6ee7b7;
+    font-size: 2.4rem;
+    font-weight: 700;
 }
 
-h2 {
-  color: #388e3c; /* Medium green */
-  font-size: 1.2rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #c8e6c9; /* Light green underline */
-  padding-bottom: 5px;
-}
-
-/* Form Styling */
+/* Form */
 #shorten-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-#shorten-form div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
 }
 
 label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #2e7d32; /* Green labels for theme tie-in */
+    color: #a7f3d0;
+    font-weight: 600;
 }
 
 input {
-  padding: 12px 15px;
-  border: 2px solid #c8e6c9; /* Light green border */
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    background: #0f2a22;
+    border: 2px solid #34d39944;
+    color: #ecfdf5;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 1rem;
 }
 
 input:focus {
-  border-color: #4da76b; /* Medium green on focus */
-  box-shadow: 0 0 0 3px rgba(77, 167, 107, 0.1);
+    border-color: #34d399;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.2);
 }
 
-/* Button Styling: Green to match logo */
 button {
-  background: #4da76b; /* Medium green */
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    background 0.3s ease,
-    transform 0.1s ease;
-  margin-top: 0.5rem;
+    background: #34d399;
+    color: #0f2a22;
+    font-weight: 700;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 button:hover {
-  background: #388e3c; /* Darker green hover */
+    background: #6ee7b7;
+    transform: translateY(-2px);
 }
 
-button:active {
-  transform: scale(0.98);
-}
-
-/* List Styling: Green accents */
-#shortened-urls {
-  list-style: none;
-  margin-top: 1rem;
-}
-
+/* Recent Links */
 #shortened-urls li {
-  background: #f1f8e9; /* Very light green bg */
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  border-left: 4px solid #4da76b; /* Green left border */
-  word-break: break-all;
+    background: #0f2a22;
+    border-left: 5px solid #34d399;
+    color: #ecfdf5;
+}
+
+/* Footer */
+footer {
+    background: #0a211a;
+    padding: 3rem 1rem 2rem;
+    margin-top: auto;
+    border-top: 1px solid #34d39933;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+}
+
+.footer-logo-img {
+    height: 38px;
+}
+
+.footer-logo span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6ee7b7;
+}
+
+.social-links {
+    margin: 1.5rem 0;
+}
+
+.social-links a {
+    color: #a7f3d0;
+    font-size: 1.8rem;
+    margin: 0 12px;
+    transition: all 0.3s;
+}
+
+.social-links a:hover {
+    color: #34d399;
+    transform: translateY(-4px);
+}
+
+.contact-info p {
+    margin: 8px 0;
+    opacity: 0.9;
+}
+
+.copyright {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    border-top: 1px solid #34d39922;
+    padding-top: 1.5rem;
 }
 
 /* Responsive */
-@media (max-width: 480px) {
-  .container {
-    padding: 1.5rem;
-  }
-
-  .header {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .logo {
-    height: 50px; /* Still bigger, but scales down on mobile */
-  }
-
-  h1 {
-    font-size: 1.6rem;
-  }
+@media (max-width: 500px) {
+    .logo { height: 62px; }
+    h1 { font-size: 2rem; }
+    .container { margin: 20px 10px; padding: 1.8rem; }
 }
