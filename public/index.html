@@ -1,102 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Leafy Shortner</title>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Favicon -->
-    <link rel="icon" href="pic.png" type="image/png">
-</head>
-<body>
+    <link rel="icon" href="pic.png" />
+  </head>
+  <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <img src="logo.png" alt="Leafy Shortner" class="logo">
-            <h1>Leafy Shortner</h1>
+      <div class="header">
+        <img src="logo.png" alt="Leafy Shortner" class="logo" />
+        <h1>Leafy Shortner</h1>
+      </div>
+
+      <form id="shorten-form">
+        <div>
+          <label for="url">Enter Long URL:</label>
+          <input
+            type="url"
+            name="url"
+            id="url"
+            placeholder="https://example.com"
+            required
+          />
         </div>
+        <div>
+          <label for="shortcode">Custom Back-half (Optional):</label>
+          <input
+            type="text"
+            name="shortcode"
+            id="shortcode"
+            placeholder="my-cool-link"
+          />
+        </div>
+        <button type="submit">Shorten URL</button>
+      </form>
 
-        <form id="shorten-form">
-            <div>
-                <label for="url">Enter Long URL:</label>
-                <input type="url" name="url" id="url" placeholder="https://example.com" required>
-            </div>
-            <div>
-                <label for="shortcode">Custom Back-half (Optional):</label>
-                <input type="text" name="shortcode" id="shortcode" placeholder="my-cool-link">
-            </div>
-            <button type="submit">Shorten URL</button>
-        </form>
-
-        <h2>Recent Links</h2>
-        <ul id="shortened-urls"></ul>
+      <h2>Recent Links</h2>
+      <ul id="shortened-urls"></ul>
     </div>
 
-    <!-- Professional Footer -->
+    <!-- Footer (unchanged) -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="logo.png" alt="Leafy" class="footer-logo-img">
-                <span>Leafy Shortner</span>
-            </div>
-            
-            <div class="social-links">
-                <a href="https://www.instagram.com/txm.hashir?utm_source=qr&igsh=azRkamVmM3Q1cG05" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/TxmHashir" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/hashir-javed-08205b233" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.freelancer.pk/u/TXM90?frm=TXM90&sb=t" target="_blank" title="Freelancer"><i class="fa-brands fa-twitter"></i></a>
-            </div>
-
-            <div class="contact-info">
-                <p><strong>Contact:</strong> +92 316 7434645</p>
-                <p>Made with ❤️ in Islamabad, Pakistan</p>
-            </div>
-
-            <div class="copyright">
-                © 2026 Leafy Shortner. All rights reserved.
-            </div>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="logo.png" alt="Leafy" class="footer-logo-img" />
+          <span>Leafy Shortner</span>
         </div>
+
+        <div class="social-links">
+          <a
+            href="https://www.instagram.com/txm.hashir?utm_source=qr&igsh=azRkamVmM3Q1cG05"
+            target="_blank"
+            title="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="https://github.com/TxmHashir" target="_blank" title="GitHub"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://linkedin.com/in/hashir-javed-08205b233"
+            target="_blank"
+            title="LinkedIn"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="https://www.freelancer.pk/u/TXM90?frm=TXM90&sb=t"
+            target="_blank"
+            title="Freelancer"
+            ><i class="fa-brands fa-twitter"></i
+          ></a>
+        </div>
+
+        <div class="contact-info">
+          <p><strong>Contact:</strong> +92 300 1234567</p>
+          <p>Made with ❤️ in Islamabad, Pakistan</p>
+        </div>
+        <div class="copyright">© 2026 Leafy Shortner. All rights reserved.</div>
+      </div>
     </footer>
 
+    <!-- COPY SUCCESS TOAST -->
+    <div id="toast" class="toast">✅ Copied to clipboard!</div>
+
     <script>
-        // Your existing script (unchanged)
-        document.getElementById('shorten-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const url = formData.get('url');
-            const shortcode = formData.get('shortcode');
+      // Shorten form (unchanged)
+      document
+        .getElementById("shorten-form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          const url = formData.get("url");
+          const shortcode = formData.get("shortcode");
 
-            try {
-                const response = await fetch("/shorten", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ url, shortcode })
-                });
+          try {
+            const response = await fetch("/shorten", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ url, shortcode }),
+            });
 
-                const data = await response.json();
-                if (response.ok) {
-                    const list = document.getElementById("shortened-urls");
-                    const li = document.createElement("li");
-                    const shortLink = `${window.location.origin}/${data.shortcode}`;
+            const data = await response.json();
+            if (response.ok) {
+              const list = document.getElementById("shortened-urls");
+              const li = document.createElement("li");
+              const shortLink = `${window.location.origin}/${data.shortcode}`;
 
-                    li.innerHTML = `
-                        <div class="link-item">
+              li.innerHTML = `
+                        <div>
                             <a href="${shortLink}" target="_blank">${shortLink}</a>
-                            <button onclick="navigator.clipboard.writeText('${shortLink}').then(() => alert('Copied!'))">Copy</button>
+                            <button onclick="copyToClipboard('${shortLink}', this)">Copy</button>
                         </div>
                     `;
-                    list.prepend(li);
-                    event.target.reset();
-                } else {
-                    alert(data.error || "Something went wrong");
-                }
-            } catch (err) {
-                console.error("Error:", err);
-                alert("Network error—check console");
+              list.prepend(li);
+              event.target.reset();
+            } else {
+              alert(data.error || "Something went wrong");
             }
+          } catch (err) {
+            console.error("Error:", err);
+            alert("Network error—check console");
+          }
         });
+
+      // ==================== NEW: Copy with Toast ====================
+      function copyToClipboard(text, button) {
+        navigator.clipboard.writeText(text).then(() => {
+          const toast = document.getElementById("toast");
+          toast.classList.add("show");
+
+          // Change button temporarily
+          const originalText = button.textContent;
+          button.textContent = "✅ Copied!";
+          button.style.background = "#10b981";
+
+          setTimeout(() => {
+            toast.classList.remove("show");
+            button.textContent = originalText;
+            button.style.background = "";
+          }, 2500);
+        });
+      }
     </script>
-</body>
+  </body>
 </html>

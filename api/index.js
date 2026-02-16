@@ -1,4 +1,9 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 const generateShortCode = () => {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -143,11 +148,11 @@ export default async (req, res) => {
 
         const finalShortCode = shortcode || generateShortCode();
 
-        if (await kv.get(finalShortCode)) {
+        if (await redis.get(finalShortCode)) {
           return res.status(400).json({ error: 'Shortcode already exists' });
         }
 
-        await kv.set(finalShortCode, url);
+        await redis.set(finalShortCode, url);
 
         return res.status(200).json({ shortcode: finalShortCode });
       } catch (e) {
@@ -164,7 +169,7 @@ export default async (req, res) => {
       return res.status(400).send('No shortcode provided');
     }
 
-    const longUrl = await kv.get(shortcode);
+    const longUrl = await redis.get(shortcode);
     if (!longUrl) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       return res.end('Short link not found');
