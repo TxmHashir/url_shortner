@@ -1,167 +1,161 @@
 /* Import a clean modern font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+  font-family: "Inter", sans-serif;
+  /* New: Green eco-gradient to harmonize with leaf logo */
+  background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #4da76b 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 450px;
-    transition: transform 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow for fresh feel */
+  width: 100%;
+  max-width: 450px;
+  transition: transform 0.3s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 100px; /* Bigger: From 40px to 60px for prominence */
+  width: auto;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(77, 167, 107, 0.3); /* Green-tinted shadow to match logo */
+ 
 }
 
 h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+  color: #2e7d32; /* Dark green for harmony */
+  text-align: center;
+  margin: 0;
+  font-weight: 600;
+  font-size: 2rem; /* Slightly larger to balance bigger logo */
 }
 
 h2 {
-    color: #444;
-    font-size: 1.2rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
+  color: #388e3c; /* Medium green */
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #c8e6c9; /* Light green underline */
+  padding-bottom: 5px;
 }
 
 /* Form Styling */
 #shorten-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 #shorten-form div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2e7d32; /* Green labels for theme tie-in */
 }
 
 input {
-    padding: 12px 15px;
-    border: 2px solid #e1e1e1;
-    border-radius: 8px;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 12px 15px;
+  border: 2px solid #c8e6c9; /* Light green border */
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 input:focus {
-    border-color: #764ba2;
-    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+  border-color: #4da76b; /* Medium green on focus */
+  box-shadow: 0 0 0 3px rgba(77, 167, 107, 0.1);
 }
 
-/* Button Styling */
+/* Button Styling: Green to match logo */
 button {
-    background: #764ba2;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.1s ease;
-    margin-top: 0.5rem;
+  background: #4da76b; /* Medium green */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    transform 0.1s ease;
+  margin-top: 0.5rem;
 }
 
 button:hover {
-    background: #5a3782;
+  background: #388e3c; /* Darker green hover */
 }
 
 button:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
-/* List Styling */
+/* List Styling: Green accents */
 #shortened-urls {
-    list-style: none;
-    margin-top: 1rem;
+  list-style: none;
+  margin-top: 1rem;
 }
 
 #shortened-urls li {
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9rem;
-    border-left: 4px solid #764ba2;
-    word-break: break-all;
+  background: #f1f8e9; /* Very light green bg */
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  border-left: 4px solid #4da76b; /* Green left border */
+  word-break: break-all;
 }
 
-/* Responsive tweak */
+/* Responsive */
 @media (max-width: 480px) {
-    .container {
-        padding: 1.5rem;
-    }
-}
+  .container {
+    padding: 1.5rem;
+  }
 
+  .header {
+    flex-direction: column;
+    gap: 8px;
+  }
 
-/* Header with Logo */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
+  .logo {
+    height: 50px; /* Still bigger, but scales down on mobile */
+  }
 
-.logo {
-    height: 40px;
-    width: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #333;
-    text-align: center;
-    margin: 0;
-    font-weight: 600;
-    font-size: 1.8rem; /* Slightly larger for impact */
-}
-
-/* Responsive: Stack logo/title on small screens */
-@media (max-width: 480px) {
-    .header {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .logo {
-        height: 35px;
-    }
-    
-    h1 {
-        font-size: 1.5rem;
-    }
+  h1 {
+    font-size: 1.6rem;
+  }
 }
