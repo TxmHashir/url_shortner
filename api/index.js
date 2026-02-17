@@ -138,14 +138,7 @@ export default async function handler(req, res) {
   // Handle POST /shorten
   if (req.method === 'POST') {
     try {
-      const body = await new Promise((resolve, reject) => {
-        let data = '';
-        req.on('data', chunk => data += chunk);
-        req.on('end', () => resolve(data));
-        req.on('error', reject);
-      });
-
-      const { url, shortcode } = JSON.parse(body);
+      const { url, shortcode } = req.body;
       if (!url) {
         return res.status(400).json({ error: 'URL is required' });
       }
