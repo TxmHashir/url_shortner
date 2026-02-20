@@ -4,19 +4,76 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="ku4KhWBOIVTzIraW_Mpjx0BwWGCbVvJ2gk30wQgD7dU" />
-    <title>Leafy Shortner - Custom URL Shortener by Hashir Javed</title>
-    <meta name="description" content="Free URL shortener tool with custom links and previews. Built with Node.js and Redis in Islamabad, Pakistan.">
-     <meta name="keywords" content="URL shortener, link shortener, custom links, Islamabad developer">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Leafy Shortner | Custom Branded URL Shortener - Free & Lightning Fast</title>
+    <meta name="description" content="Create custom branded short links instantly with Leafy Shortner. Free URL shortener with custom back-halves, beautiful preview pages, secure redirects &amp; lightning-fast performance. Built for marketers &amp; businesses in Pakistan and worldwide." />
+    <meta name="keywords" content="url shortener, custom url shortener, branded url shortener, short links, free url shortener, custom short links, link shortener, url shortener pakistan, short url generator, branded short urls, preview page shortener, secure url shortener, leafy shortner, hashir javed, islamabad" />
+    
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Hashir Javed" />
+    <link rel="canonical" href="https://leafyshortner.vercel.app/" /> <!-- ← CHANGE TO YOUR ACTUAL DOMAIN -->
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Leafy Shortner | Custom Branded URL Shortener - Free & Lightning Fast" />
+    <meta property="og:description" content="Create custom branded short links instantly with Leafy Shortner. Free URL shortener with custom back-halves, preview pages &amp; lightning-fast redirects." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://leafyshortner.vercel.app/" /> <!-- ← CHANGE TO YOUR ACTUAL DOMAIN -->
+    <meta property="og:image" content="https://leafyshortner.vercel.app/logo.png" /> <!-- ← CHANGE TO ABSOLUTE URL -->
+    <meta property="og:site_name" content="Leafy Shortner" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Leafy Shortner | Custom Branded URL Shortener" />
+    <meta name="twitter:description" content="Free custom short links with preview pages. Lightning-fast &amp; secure." />
+    <meta name="twitter:image" content="https://leafyshortner.vercel.app/logo.png" /> <!-- ← CHANGE TO ABSOLUTE URL -->
+
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
-    <link rel="icon" href="pic.png" />
+    <link rel="icon" href="pic.png" type="image/png" />
+
+    <!-- Structured Data (JSON-LD) - Organization + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Leafy Shortner",
+      "url": "https://leafyshortner.vercel.app/",
+      "logo": "https://leafyshortner.vercel.app/logo.png",
+      "description": "Fast, secure & free custom URL shortener with branded short links and preview pages.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Islamabad",
+        "addressCountry": "PK"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+92-316-7434645",
+        "contactType": "customer service",
+        "areaServed": "PK",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://www.instagram.com/txm.hashir",
+        "https://github.com/TxmHashir",
+        "https://linkedin.com/in/hashir-javed-08205b233",
+        "https://www.freelancer.pk/u/TXM90"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <img src="logo.png" alt="Leafy Shortner" class="logo" />
+        <img src="logo.png" alt="Leafy Shortner logo - Custom URL Shortener" class="logo" />
         <h1>Leafy Shortner</h1>
+      </div>
+
+      <!-- Added SEO-rich descriptive content -->
+      <div class="service-description">
+        <p><strong>Free custom URL shortener</strong> that lets you create memorable branded short links with your own back-half (e.g. leafy/my-promo2026). Add preview pages, enjoy lightning-fast redirects, and track your links securely — all powered by Node.js + Redis on Vercel.</p>
+        <p>Perfect for social media, marketing campaigns, affiliate links &amp; businesses in Pakistan and worldwide.</p>
       </div>
 
       <form id="shorten-form">
@@ -26,7 +83,7 @@
             type="url"
             name="url"
             id="url"
-            placeholder="https://example.com"
+            placeholder="https://example.com/very-long-url"
             required
           />
         </div>
@@ -37,57 +94,69 @@
             name="shortcode"
             id="shortcode"
             placeholder="my-cool-link"
+            pattern="[a-zA-Z0-9\-_]+"
+            title="Only letters, numbers, hyphen and underscore allowed"
           />
         </div>
-        <button type="submit">Shorten URL</button>
+        <button type="submit">Shorten URL Now</button>
       </form>
 
-      <h2>Recent Links</h2>
+      <h2>Your Recent Shortened Links</h2>
       <ul id="shortened-urls"></ul>
     </div>
 
-  
+    <!-- Features section for better on-page SEO -->
+    <section class="features">
+      <h2>Why Creators &amp; Marketers Love Leafy Shortner</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <i class="fas fa-link"></i>
+          <h3>Custom Branded Links</h3>
+          <p>Choose your own shortcode instead of random strings</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-eye"></i>
+          <h3>Beautiful Preview Pages</h3>
+          <p>Professional link preview before redirect</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-bolt"></i>
+          <h3>Lightning-Fast Redirects</h3>
+          <p>Sub-100ms redirects powered by Redis</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Secure &amp; Private</h3>
+          <p>No tracking cookies, GDPR-friendly</p>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div class="footer-content">
         <div class="footer-logo">
-          <img src="logo.png" alt="Leafy" class="footer-logo-img" />
+          <img src="logo.png" alt="Leafy Shortner footer logo" class="footer-logo-img" />
           <span>Leafy Shortner</span>
         </div>
 
         <div class="social-links">
-          <a href="https://www.instagram.com/txm.hashir?utm_source=qr&igsh=azRkamVmM3Q1cG05" target="_blank"
-            title="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a href="https://github.com/TxmHashir" target="_blank" title="GitHub"
-            ><i class="fab fa-github"></i
-          ></a>
-          <a
-            href="https://linkedin.com/in/hashir-javed-08205b233"
-            target="_blank"
-            title="LinkedIn"
-            ><i class="fab fa-linkedin"></i
-          ></a>
-          <a
-            href="https://www.freelancer.pk/u/TXM90?frm=TXM90&sb=t"
-            target="_blank"
-            title="Freelancer"
-            ><i class="fas fa-globe"></i></a>
+          <a href="https://www.instagram.com/txm.hashir?utm_source=qr&igsh=azRkamVmM3Q1cG05" target="_blank" title="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/TxmHashir" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/hashir-javed-08205b233" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.freelancer.pk/u/TXM90" target="_blank" title="Freelancer"><i class="fas fa-globe"></i></a>
         </div>
 
         <div class="contact-info">
           <p><strong>Contact:</strong> +92-316-7434645</p>
           <p>A project by Hashir Javed • Islamabad, Pakistan</p>
         </div>
-        <div class="copyright">© 2026 Leafy Shortner. All rights reserved.</div>
+        <div class="copyright">© 2026 Leafy Shortner. All rights reserved. • Free Custom URL Shortener</div>
       </div>
     </footer>
 
-    
     <div id="toast" class="toast">✅ Copied to clipboard!</div>
 
     <script>
-      
       document
         .getElementById("shorten-form")
         .addEventListener("submit", async (event) => {
@@ -110,11 +179,11 @@
               const shortLink = `${window.location.origin}/${data.shortcode}`;
 
               li.innerHTML = `
-                        <div>
-                            <a href="${shortLink}" target="_blank">${shortLink}</a>
-                            <button onclick="copyToClipboard('${shortLink}', this)">Copy</button>
-                        </div>
-                    `;
+                <div>
+                  <a href="${shortLink}" target="_blank" rel="noopener">${shortLink}</a>
+                  <button onclick="copyToClipboard('${shortLink}', this)">Copy</button>
+                </div>
+              `;
               list.prepend(li);
               event.target.reset();
             } else {
@@ -126,13 +195,11 @@
           }
         });
 
-      
       function copyToClipboard(text, button) {
         navigator.clipboard.writeText(text).then(() => {
           const toast = document.getElementById("toast");
           toast.classList.add("show");
 
-          
           const originalText = button.textContent;
           button.textContent = "✅ Copied!";
           button.style.background = "#10b981";
