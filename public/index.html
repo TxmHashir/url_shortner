@@ -1,216 +1,253 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="ku4KhWBOIVTzIraW_Mpjx0BwWGCbVvJ2gk30wQgD7dU" />
-    
-    <!-- Primary SEO Meta Tags -->
-    <title>Leafy Shortner | Custom Branded URL Shortener - Free & Lightning Fast</title>
-    <meta name="description" content="Create custom branded short links instantly with Leafy Shortner. Free URL shortener with custom back-halves, beautiful preview pages, secure redirects &amp; lightning-fast performance. Built for marketers &amp; businesses in Pakistan and worldwide." />
-    <meta name="keywords" content="url shortener, custom url shortener, branded url shortener, short links, free url shortener, custom short links, link shortener, url shortener pakistan, short url generator, branded short urls, preview page shortener, secure url shortener, leafy shortner, hashir javed, islamabad" />
-    
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="author" content="Hashir Javed" />
-    <link rel="canonical" href="https://leafyshortner.vercel.app/" /> <!-- ← CHANGE TO YOUR ACTUAL DOMAIN -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="ku4KhWBOIVTzIraW_Mpjx0BwWGCbVvJ2gk30wQgD7dU" />
+  
+  <title>Leafy Shortner | Custom Branded Short Links - Free & Instant</title>
+  <meta name="description" content="Free custom URL shortener with branded back-halves, beautiful preview pages, and lightning-fast redirects. Built for marketers & creators in Pakistan and worldwide." />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Leafy Shortner | Custom Branded URL Shortener - Free & Lightning Fast" />
-    <meta property="og:description" content="Create custom branded short links instantly with Leafy Shortner. Free URL shortener with custom back-halves, preview pages &amp; lightning-fast redirects." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://leafyshortner.vercel.app/" /> <!-- ← CHANGE TO YOUR ACTUAL DOMAIN -->
-    <meta property="og:image" content="https://leafyshortner.vercel.app/logo.png" /> <!-- ← CHANGE TO ABSOLUTE URL -->
-    <meta property="og:site_name" content="Leafy Shortner" />
-    <meta property="og:locale" content="en_US" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Leafy Shortner | Custom Branded URL Shortener" />
-    <meta name="twitter:description" content="Free custom short links with preview pages. Lightning-fast &amp; secure." />
-    <meta name="twitter:image" content="https://leafyshortner.vercel.app/logo.png" /> <!-- ← CHANGE TO ABSOLUTE URL -->
+  <link rel="icon" href="pic.png" />
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="pic.png" type="image/png" />
-
-    <!-- Structured Data (JSON-LD) - Organization + WebSite -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Leafy Shortner",
-      "url": "https://leafyshortner.vercel.app/",
-      "logo": "https://leafyshortner.vercel.app/logo.png",
-      "description": "Fast, secure & free custom URL shortener with branded short links and preview pages.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Islamabad",
-        "addressCountry": "PK"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+92-316-7434645",
-        "contactType": "customer service",
-        "areaServed": "PK",
-        "availableLanguage": "English"
-      },
-      "sameAs": [
-        "https://www.instagram.com/txm.hashir",
-        "https://github.com/TxmHashir",
-        "https://linkedin.com/in/hashir-javed-08205b233",
-        "https://www.freelancer.pk/u/TXM90"
-      ]
+  <script>
+    tailwind.config = {
+      content: [],
+      theme: {
+        extend: {
+          colors: {
+            leafy: {
+              50: '#ecfdf5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              900: '#0f2a22'
+            }
+          }
+        }
+      }
     }
-    </script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <img src="logo.png" alt="Leafy Shortner logo - Custom URL Shortener" class="logo" />
-        <h1>Leafy Shortner</h1>
+  </script>
+
+  <style>
+    .hero-bg {
+      background: linear-gradient(135deg, #0f2a22 0%, #1e3a2f 100%);
+    }
+    .glass {
+      background: rgba(30, 58, 47, 0.85);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white font-sans">
+
+  <!-- Navbar -->
+  <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-md fixed w-full z-50">
+    <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="logo.png" alt="Leafy" class="h-9 w-auto">
+        <span class="text-2xl font-bold tracking-tight text-emerald-400">Leafy</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#features" class="hover:text-emerald-400 transition">Features</a>
+        <a href="#" class="hover:text-emerald-400 transition">Pricing</a>
+        <a href="https://github.com/TxmHashir" target="_blank" class="hover:text-emerald-400 transition">GitHub</a>
+      </div>
+      <a href="https://github.com/TxmHashir" target="_blank"
+         class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-2xl text-sm font-semibold transition">
+        <i class="fab fa-github"></i>
+        Star on GitHub
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-bg min-h-screen flex items-center pt-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+        <i class="fas fa-leaf"></i>
+        Free forever • No sign-up
       </div>
 
-      <!-- Added SEO-rich descriptive content -->
-      <div class="service-description">
-        <p><strong>Free custom URL shortener</strong> that lets you create memorable branded short links with your own back-half (e.g. leafy/my-promo2026). Add preview pages, enjoy lightning-fast redirects, and track your links securely — all powered by Node.js + Redis on Vercel.</p>
-        <p>Perfect for social media, marketing campaigns, affiliate links &amp; businesses in Pakistan and worldwide.</p>
-      </div>
+      <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+        Shorten.<br>Brand.<br><span class="text-emerald-400">Share.</span>
+      </h1>
 
-      <form id="shorten-form">
-        <div>
-          <label for="url">Enter Long URL:</label>
-          <input
-            type="url"
-            name="url"
-            id="url"
-            placeholder="https://example.com/very-long-url"
-            required
-          />
+      <p class="text-xl text-zinc-400 max-w-xl mx-auto mb-10">
+        The cleanest custom URL shortener. Beautiful branded links, preview pages, 
+        and sub-100ms redirects — powered by Node.js + Redis.
+      </p>
+
+      <!-- Main Form (Bitly style) -->
+      <form id="shorten-form" class="max-w-2xl mx-auto">
+        <div class="glass border border-white/10 rounded-3xl p-2 shadow-2xl">
+          <div class="flex flex-col md:flex-row gap-3">
+            <input
+              type="url"
+              id="url"
+              name="url"
+              placeholder="https://your-long-link.com/very-long-path"
+              required
+              class="flex-1 bg-zinc-900 border border-white/10 focus:border-emerald-500 rounded-2xl px-6 py-5 text-lg outline-none placeholder-zinc-500"
+            />
+            <button type="submit"
+              class="bg-emerald-500 hover:bg-emerald-600 transition font-semibold text-lg px-10 py-5 rounded-2xl flex items-center gap-3">
+              Shorten Now
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <!-- Custom back-half -->
+          <div class="mt-4 flex flex-col md:flex-row gap-3 px-2">
+            <div class="flex-1">
+              <label class="text-xs text-zinc-400 block mb-1 ml-2">Custom back-half (optional)</label>
+              <input
+                type="text"
+                id="shortcode"
+                name="shortcode"
+                placeholder="my-promo-2026"
+                class="w-full bg-zinc-900 border border-white/10 focus:border-emerald-500 rounded-2xl px-6 py-4 outline-none text-sm"
+              />
+            </div>
+          </div>
         </div>
-        <div>
-          <label for="shortcode">Custom Back-half (Optional):</label>
-          <input
-            type="text"
-            name="shortcode"
-            id="shortcode"
-            placeholder="my-cool-link"
-            pattern="[a-zA-Z0-9\-_]+"
-            title="Only letters, numbers, hyphen and underscore allowed"
-          />
-        </div>
-        <button type="submit">Shorten URL Now</button>
       </form>
 
-      <h2>Your Recent Shortened Links</h2>
-      <ul id="shortened-urls"></ul>
+      <p class="text-zinc-500 text-sm mt-6">Example: leafy/my-cool-link</p>
+    </div>
+  </section>
+
+  <!-- Recent Links -->
+  <section class="max-w-4xl mx-auto px-6 -mt-12 relative z-10">
+    <div class="glass border border-white/10 rounded-3xl p-8 shadow-2xl">
+      <h2 class="text-xl font-semibold mb-6 flex items-center gap-3">
+        <i class="fas fa-history text-emerald-400"></i>
+        Your Recent Short Links
+      </h2>
+      <ul id="shortened-urls" class="space-y-3"></ul>
+    </div>
+  </section>
+
+  <!-- Features (Bitly-style cards) -->
+  <section id="features" class="max-w-6xl mx-auto px-6 py-24">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4">Why creators &amp; marketers love Leafy</h2>
+      <p class="text-zinc-400 max-w-md mx-auto">Everything you need in one beautiful tool</p>
     </div>
 
-    <!-- Features section for better on-page SEO -->
-    <section class="features">
-      <h2>Why Creators &amp; Marketers Love Leafy Shortner</h2>
-      <div class="feature-grid">
-        <div class="feature-item">
-          <i class="fas fa-link"></i>
-          <h3>Custom Branded Links</h3>
-          <p>Choose your own shortcode instead of random strings</p>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:border-emerald-500/50 transition group">
+        <i class="fas fa-link text-4xl text-emerald-400 mb-6"></i>
+        <h3 class="text-2xl font-semibold mb-3">Custom Branded Links</h3>
+        <p class="text-zinc-400">Choose your own shortcode instead of random strings</p>
+      </div>
+      <div class="bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:border-emerald-500/50 transition group">
+        <i class="fas fa-eye text-4xl text-emerald-400 mb-6"></i>
+        <h3 class="text-2xl font-semibold mb-3">Preview Pages</h3>
+        <p class="text-zinc-400">Professional link preview before redirect</p>
+      </div>
+      <div class="bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:border-emerald-500/50 transition group">
+        <i class="fas fa-bolt text-4xl text-emerald-400 mb-6"></i>
+        <h3 class="text-2xl font-semibold mb-3">Lightning Fast</h3>
+        <p class="text-zinc-400">Sub-100ms redirects powered by Redis</p>
+      </div>
+      <div class="bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:border-emerald-500/50 transition group">
+        <i class="fas fa-shield-alt text-4xl text-emerald-400 mb-6"></i>
+        <h3 class="text-2xl font-semibold mb-3">Secure & Private</h3>
+        <p class="text-zinc-400">No tracking cookies • GDPR friendly</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black border-t border-white/10 py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex items-center gap-3">
+          <img src="logo.png" alt="Leafy" class="h-8">
+          <span class="text-2xl font-bold text-emerald-400">Leafy Shortner</span>
         </div>
-        <div class="feature-item">
-          <i class="fas fa-eye"></i>
-          <h3>Beautiful Preview Pages</h3>
-          <p>Professional link preview before redirect</p>
+        <div class="flex gap-8 text-zinc-400">
+          <a href="https://github.com/TxmHashir" target="_blank" class="hover:text-white transition"><i class="fab fa-github text-2xl"></i></a>
+          <a href="https://www.instagram.com/txm.hashir" target="_blank" class="hover:text-white transition"><i class="fab fa-instagram text-2xl"></i></a>
+          <a href="https://linkedin.com/in/hashir-javed-08205b233" target="_blank" class="hover:text-white transition"><i class="fab fa-linkedin text-2xl"></i></a>
         </div>
-        <div class="feature-item">
-          <i class="fas fa-bolt"></i>
-          <h3>Lightning-Fast Redirects</h3>
-          <p>Sub-100ms redirects powered by Redis</p>
-        </div>
-        <div class="feature-item">
-          <i class="fas fa-shield-alt"></i>
-          <h3>Secure &amp; Private</h3>
-          <p>No tracking cookies, GDPR-friendly</p>
+        <div class="text-center md:text-right text-zinc-500 text-sm">
+          <p>A project by <strong>Hashir Javed</strong> • Islamabad, Pakistan</p>
+          <p class="mt-1">© 2026 Leafy Shortner. All rights reserved.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </footer>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="logo.png" alt="Leafy Shortner footer logo" class="footer-logo-img" />
-          <span>Leafy Shortner</span>
-        </div>
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-6 right-6 bg-emerald-500 text-black font-semibold px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3">
+    <i class="fas fa-check-circle"></i>
+    Copied to clipboard!
+  </div>
 
-        <div class="social-links">
-          <a href="https://www.instagram.com/txm.hashir?utm_source=qr&igsh=azRkamVmM3Q1cG05" target="_blank" title="Follow on Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://github.com/TxmHashir" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://linkedin.com/in/hashir-javed-08205b233" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://www.freelancer.pk/u/TXM90" target="_blank" title="Freelancer"><i class="fas fa-globe"></i></a>
-        </div>
+  <script>
+    // Tailwind script already loaded above
 
-        <div class="contact-info">
-          <p><strong>Contact:</strong> +92-316-7434645</p>
-          <p>A project by Hashir Javed • Islamabad, Pakistan</p>
-        </div>
-        <div class="copyright">© 2026 Leafy Shortner. All rights reserved. • Free Custom URL Shortener</div>
-      </div>
-    </footer>
+    document.getElementById("shorten-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const url = formData.get("url");
+      const shortcode = formData.get("shortcode");
 
-    <div id="toast" class="toast">✅ Copied to clipboard!</div>
-
-    <script>
-      document
-        .getElementById("shorten-form")
-        .addEventListener("submit", async (event) => {
-          event.preventDefault();
-          const formData = new FormData(event.target);
-          const url = formData.get("url");
-          const shortcode = formData.get("shortcode");
-
-          try {
-            const response = await fetch("/shorten", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ url, shortcode }),
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-              const list = document.getElementById("shortened-urls");
-              const li = document.createElement("li");
-              const shortLink = `${window.location.origin}/${data.shortcode}`;
-
-              li.innerHTML = `
-                <div>
-                  <a href="${shortLink}" target="_blank" rel="noopener">${shortLink}</a>
-                  <button onclick="copyToClipboard('${shortLink}', this)">Copy</button>
-                </div>
-              `;
-              list.prepend(li);
-              event.target.reset();
-            } else {
-              alert(data.error || "Something went wrong");
-            }
-          } catch (err) {
-            console.error("Error:", err);
-            alert("Network error—check console");
-          }
+      try {
+        const response = await fetch("/shorten", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, shortcode }),
         });
 
-      function copyToClipboard(text, button) {
-        navigator.clipboard.writeText(text).then(() => {
-          const toast = document.getElementById("toast");
-          toast.classList.add("show");
+        const data = await response.json();
+        if (response.ok) {
+          const list = document.getElementById("shortened-urls");
+          const li = document.createElement("li");
+          const shortLink = `${window.location.origin}/${data.shortcode}`;
 
-          const originalText = button.textContent;
-          button.textContent = "✅ Copied!";
-          button.style.background = "#10b981";
-
-          setTimeout(() => {
-            toast.classList.remove("show");
-            button.textContent = originalText;
-            button.style.background = "";
-          }, 2500);
-        });
+          li.className = "flex justify-between items-center bg-zinc-900 border border-white/10 rounded-2xl px-6 py-5 hover:border-emerald-500/50 transition group";
+          li.innerHTML = `
+            <a href="${shortLink}" target="_blank" class="text-emerald-400 hover:underline font-medium">${shortLink}</a>
+            <button onclick="copyToClipboard('${shortLink}', this)" 
+              class="bg-emerald-500 hover:bg-emerald-600 text-black px-5 py-2 rounded-xl font-semibold text-sm transition">
+              Copy
+            </button>
+          `;
+          list.prepend(li);
+          event.target.reset();
+        } else {
+          alert(data.error || "Something went wrong");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Network error");
       }
-    </script>
-  </body>
+    });
+
+    function copyToClipboard(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById("toast");
+        toast.classList.remove("hidden");
+        toast.style.transform = "translateY(0)";
+
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        btn.disabled = true;
+
+        setTimeout(() => {
+          toast.classList.add("hidden");
+          btn.textContent = original;
+          btn.disabled = false;
+        }, 2500);
+      });
+    }
+  </script>
+</body>
 </html>
